@@ -15,8 +15,6 @@ body {
 #container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   flex-grow: 1;
   height: 60vh;
   width: 40vh;
@@ -29,4 +27,11 @@ body {
 .row {
   display: flex;
   flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.row > div {
+  width: 25px;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
