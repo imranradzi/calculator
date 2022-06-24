@@ -1,0 +1,32 @@
+
+* {
+  border-color: red;
+  border-style: solid;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 100px 0px;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  height: 60vh;
+  width: 40vh;
+}
+
+#display {
+  height: 10vh;
+}
+
+.row {
+  display: flex;
+  flex-grow: 1;
+}
