@@ -27,7 +27,12 @@ function operate(a, b, operator) {
 }
 
 let numDisplay = document.querySelector('#numberDisplay');
+
+// this will store what we want to appear on numDisplay
 let numDisplayContent = '';
+
+let secondNumDisplay = document.querySelector('#secondaryNumberDisplay');
+secondNumDisplay.textContent = '';
 
 // will store the operands/operators that we wil add, subtract, etc.
 let operandArray = [];
@@ -47,8 +52,10 @@ const allClear = document.querySelector('.allClear');
 numsArray.forEach(num => {
   num.addEventListener('click', function() {
     numDisplayContent = numDisplayContent + num.textContent;
+
     // appends number clicked onto the display
     numDisplay.textContent = numDisplayContent;
+    secondNumDisplay.textContent += `${num.textContent}`;
   })
 });
 
@@ -58,7 +65,30 @@ opsArray.forEach(op => {
     // add the current number/operator on display to operandArray/operatorArray
     operandArray.push(parseInt(numDisplay.textContent));
     operatorArray.push(op.textContent);
-    numDisplay.textContent = op.textContent;
+    secondNumDisplay.textContent += ` ${op.textContent} `;
+
+    let result;
+    // if, for example, we previously clicked 2, +, 2 then + again,
+    // we add (or subtract, multiply, etc.) the previous two numbers
+    // and current display is changed to the result
+    if (operandArray.length === 2) {
+      // checks if we are dividing by zero
+      if (operandArray[1] === 0 && operatorArray[0] === '/') {
+
+        // resets calculator, displaying error message before resetting
+        errorMessage();
+      } else {
+        // by this point our operandArray contains two operands, and
+        // two operators, of which we select the first operator
+        // since that is the operator with precedence (we clicked it first)
+        result = operate(operandArray[0], operandArray[1], operatorArray[0]);
+        numDisplay.textContent = result;
+
+        // resets the two arrays to be used for the next calculation
+        operandArray = [parseInt(numDisplay.textContent)];
+        operatorArray = [operatorArray[1]];
+      }
+    }
 
     // set numDisplayContent to empty string, as when we press another number,
     // the next operand shouldn't be appended to the current operand
@@ -68,32 +98,37 @@ opsArray.forEach(op => {
 
 // functionality for equal button
 eq.addEventListener('click', function() {
-  // current number on display added to operandArray
-  operandArray.push(parseInt(numDisplayContent));
-
-  // if 0 is on display then we do nothing
-  if (!(numDisplayContent == 0)) {
-    let i = 0;
-    let result = operandArray.reduce((prevVal, currVal) => {
-      console.log('i am running')
-      return operate(prevVal, currVal, operatorArray[i++]);
-    });
-
-  
-    // empty operandArray/operator after we have performed all operators
-    // to make way for next set of operations
-    operandArray = [];
-    operatorArray = [];
-  
-    numDisplayContent = result;
-    numDisplay.textContent = result;
+  if (!(operandArray.length === 0)) {
+    operandArray.push(parseInt(numDisplay.textContent));
+    if (operandArray[1] === 0 && operatorArray[0] === '/') {
+      errorMessage();
+    } else {
+      // current number on display added to operandArray
+      result = operate(operandArray[0], operandArray[1], operatorArray[0]);
+      operandArray = [];
+      operatorArray = [];
+      numDisplay.textContent = result;
+    }
   }
 });
 
 // functionality for all clear
 allClear.addEventListener('click', function() {
+  calcClear();
+});
+
+// clears the calculator's 'memory'
+function calcClear() {
   numDisplayContent = '';
   operandArray = [];
   operatorArray = [];
   numDisplay.textContent = 0;
-});
+  secondNumDisplay.textContent = '';
+}
+
+// error message + resetting the numDisplay.textContent + resetting the whole calc
+function errorMessage() {
+  numDisplay.textContent = 'Unable to divide by zero! Resetting...'
+  setTimeout(function() {
+    calcClear()}, 1000)
+}

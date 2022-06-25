@@ -1,5 +1,5 @@
 
-* {
+body div {
   border-color: grey;
   border-style: solid;
 }
@@ -23,7 +23,13 @@ body {
 #display {
   height: 10vh;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+}
+
+#display > div {
+  text-align: right;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
 .row {
