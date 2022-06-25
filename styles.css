@@ -1,6 +1,6 @@
 
 * {
-  border-color: red;
+  border-color: grey;
   border-style: solid;
 }
 
@@ -22,6 +22,8 @@ body {
 
 #display {
   height: 10vh;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .row {
