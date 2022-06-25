@@ -1,31 +1,3 @@
-
-
-function add(a, b) {
-  return a + b;
-}
-
-function subtract(a, b) {
-  return a - b;
-}
-
-function multiply(a, b) {
-  return a * b;
-}
-
-function divide(a, b) {
-  return a / b;
-}
-
-function operate(a, b, operator) {
-  operatorList = {
-    "+": add(a, b),
-    "-": subtract(a, b),
-    "x": multiply(a, b),
-    "/": divide(a, b),
-  }
-  if (operator in operatorList) return operatorList[operator];
-}
-
 let numDisplay = document.querySelector('#numberDisplay');
 
 // this will store what we want to appear on numDisplay
@@ -37,19 +9,13 @@ secondNumDisplay.textContent = '';
 // will store the operands/operators that we wil add, subtract, etc.
 let operandArray = [];
 let operatorArray = [];
-
 let negative = false;
 
 const nums = document.querySelectorAll('.row > .nums');
 const numsArray = Array.from(nums);
-
 const ops = document.querySelectorAll('.row > .ops');
 const opsArray = Array.from(ops);
-
-
-
 const eq = document.querySelector('.eq');
-
 const allClear = document.querySelector('.allClear');
 
 // functionality for number buttons
@@ -67,8 +33,6 @@ numsArray.forEach(num => {
     secondNumDisplay.textContent += `${num.textContent}`;
   })
 });
-
-
 
 // functionality for operator buttons
 opsArray.forEach(op => {
@@ -110,7 +74,6 @@ opsArray.forEach(op => {
       }
     }
     
-
     // set numDisplayContent to empty string, as when we press another number,
     // the next operand shouldn't be appended to the current operand
     numDisplayContent = '';
@@ -154,3 +117,30 @@ function errorMessage() {
   setTimeout(function() {
     calcClear()}, 1000)
 }
+
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function divide(a, b) {
+  return a / b;
+}
+
+function operate(a, b, operator) {
+  operatorList = {
+    "+": add(a, b),
+    "-": subtract(a, b),
+    "x": multiply(a, b),
+    "/": divide(a, b),
+  }
+  if (operator in operatorList) return operatorList[operator];
+}
+
