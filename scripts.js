@@ -63,7 +63,7 @@ numsArray.forEach(num => {
 opsArray.forEach(op => {
   op.addEventListener('click', function() {
     // add the current number/operator on display to operandArray/operatorArray
-    operandArray.push(parseInt(numDisplay.textContent));
+    operandArray.push(parseFloat(numDisplay.textContent));
     operatorArray.push(op.textContent);
     secondNumDisplay.textContent += ` ${op.textContent} `;
 
@@ -81,11 +81,12 @@ opsArray.forEach(op => {
         // by this point our operandArray contains two operands, and
         // two operators, of which we select the first operator
         // since that is the operator with precedence (we clicked it first)
-        result = operate(operandArray[0], operandArray[1], operatorArray[0]);
+        result = operate(operandArray[0], operandArray[1], operatorArray[0])
+                  .toPrecision(5);
         numDisplay.textContent = result;
 
         // resets the two arrays to be used for the next calculation
-        operandArray = [parseInt(numDisplay.textContent)];
+        operandArray = [parseFloat(numDisplay.textContent)];
         operatorArray = [operatorArray[1]];
       }
     }
@@ -99,7 +100,7 @@ opsArray.forEach(op => {
 // functionality for equal button
 eq.addEventListener('click', function() {
   if (!(operandArray.length === 0)) {
-    operandArray.push(parseInt(numDisplay.textContent));
+    operandArray.push(parseFloat(numDisplay.textContent));
     if (operandArray[1] === 0 && operatorArray[0] === '/') {
       errorMessage();
     } else {
@@ -107,7 +108,7 @@ eq.addEventListener('click', function() {
       result = operate(operandArray[0], operandArray[1], operatorArray[0]);
       operandArray = [];
       operatorArray = [];
-      numDisplay.textContent = result;
+      numDisplay.textContent = result.toPrecision(5);
     }
   }
 });
