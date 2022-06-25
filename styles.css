@@ -1,18 +1,26 @@
 
-body div {
-  border-color: grey;
-  border-style: solid;
-}
 
 body {
+  background-color: rgb(43, 43, 43);
   display: flex;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: x-large;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 100px 0px;
 }
 
+h1 {
+  color: white;
+}
+
 #container {
+  border-color: rgb(189, 189, 189);
+  background-color: rgb(189, 189, 189);
+  border-style: solid;
+  border-width: 10px;
+  border-radius: 3%;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -21,25 +29,52 @@ body {
 }
 
 #display {
+  background-color: azure;
+  border-color: azure;
+  border-style: solid;
+  border-radius: 10% 10% 0% 0%;
   height: 10vh;
   display: flex;
   flex-direction: column;
+  padding: 10px;
 }
 
 #display > div {
-  text-align: right;
   flex-grow: 1;
   flex-shrink: 1;
+  height: 50px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-right: 15px;
 }
 
 .row {
+  background-color: rgb(76, 145, 145);
   display: flex;
   flex-grow: 1;
   flex-shrink: 1;
 }
 
 .row > div {
+  border-style: solid;
+  border-color: rgb(196, 196, 196);
+  border-width: 2px;
+  margin: -1px;
   width: 25px;
   flex-grow: 1;
   flex-shrink: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+#container .ops,
+#container .eq {
+  background-color: rgb(64, 216, 216);
+}
+
+#container .allClear {
+  background-color: aquamarine;
+}
+
