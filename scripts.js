@@ -38,7 +38,8 @@ numsArray.forEach(num => {
 opsArray.forEach(op => {
   op.addEventListener('click', function() {
     // if we want to use negative numbers
-    if (op.textContent === '-' && operandArray[0] && operatorArray[0]) {
+    if (op.textContent === '-' && operandArray.length === 1
+        && operatorArray.length === 1) {
         numDisplayContent = numDisplayContent + op.textContent;
         negative = true;
         secondNumDisplay.textContent += ` ${op.textContent} `;
